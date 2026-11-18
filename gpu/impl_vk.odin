@@ -477,6 +477,7 @@ _init :: proc(validation := true, loc := #caller_location) -> bool
         required_extensions := make([dynamic]cstring, allocator = scratch)
         append(&required_extensions, vk.KHR_SWAPCHAIN_EXTENSION_NAME)
         append(&required_extensions, vk.EXT_SHADER_OBJECT_EXTENSION_NAME)
+        append(&required_extensions, vk.EXT_DEPTH_CLIP_ENABLE_EXTENSION_NAME)
         for req_ext in EXTRA_DEVICE_EXTENSIONS {
             append(&required_extensions, req_ext)
         }
