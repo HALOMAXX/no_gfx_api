@@ -308,7 +308,7 @@ blas_alloc_and_create :: proc(desc: BLAS_Info, loc := #caller_location) -> Owned
     size, align := bvh_size_and_align(desc, loc = loc)
     ptr := mem_alloc_raw(size, 1, align, .GPU, loc = loc)
     bvh := bvh_create(desc, ptr, loc = loc)
-    return Owned_BVH { bvh, ptr }
+    return Owned_BVH { bvh, ptr.gpu }
 }
 
 tlas_alloc_and_create :: proc(desc: TLAS_Info, loc := #caller_location) -> Owned_BVH
@@ -316,7 +316,7 @@ tlas_alloc_and_create :: proc(desc: TLAS_Info, loc := #caller_location) -> Owned
     size, align := bvh_size_and_align(desc, loc = loc)
     ptr := mem_alloc_raw(size, 1, align, .GPU, loc = loc)
     bvh := bvh_create(desc, ptr, loc = loc)
-    return Owned_BVH { bvh, ptr }
+    return Owned_BVH { bvh, ptr.gpu }
 }
 
 bvh_alloc_and_create :: proc { blas_alloc_and_create, tlas_alloc_and_create }
