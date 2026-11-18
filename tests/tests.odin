@@ -109,7 +109,7 @@ main :: proc()
             cmd_buf := gpu.commands_begin(.Main)
             gpu.cmd_begin_render_pass(cmd_buf, {
                 color_attachments = {
-                    { texture = target.color, clear_color = { 0, 0, 0, 1 } }
+                    { texture = target.color.tex, clear_color = { 0, 0, 0, 1 } }
                 }
             })
             gpu.cmd_end_render_pass(cmd_buf)
@@ -213,7 +213,7 @@ test_spec_constants :: proc(target: Render_Target)
     cmd_buf := gpu.commands_begin(.Main)
     gpu.cmd_begin_render_pass(cmd_buf, {
         color_attachments = {
-            { texture = target.color }
+            { texture = target.color.tex }
         }
     })
     gpu.cmd_set_shaders(cmd_buf, vert_shader, frag_shader)
@@ -315,7 +315,7 @@ test_texture :: proc(target: Render_Target)
     cmd_buf := gpu.commands_begin(.Main)
     gpu.cmd_begin_render_pass(cmd_buf, {
         color_attachments = {
-            { texture = target.color, clear_color = { 0, 0, 0, 1 } }
+            { texture = target.color.tex, clear_color = { 0, 0, 0, 1 } }
         }
     })
     gpu.cmd_set_shaders(cmd_buf, vert_shader, frag_shader)
@@ -519,10 +519,10 @@ test_texture_advanced :: proc(target: Render_Target)
     cmd_buf := gpu.commands_begin(.Main)
     gpu.cmd_begin_render_pass(cmd_buf, {
         color_attachments = {
-            { texture = target.color, clear_color = { 0.7, 0.7, 0.7, 1.0 } }
+            { texture = target.color.tex, clear_color = { 0.7, 0.7, 0.7, 1.0 } }
         },
         depth_attachment = gpu.Render_Attachment {
-            texture = target.depth, clear_color = 1.0
+            texture = target.depth.tex, clear_color = 1.0
         },
     })
 
@@ -733,7 +733,7 @@ test_indirect :: proc(target: Render_Target)
     cmd_buf := gpu.commands_begin(.Main)
     gpu.cmd_begin_render_pass(cmd_buf, {
         color_attachments = {
-            { texture = target.color, clear_color = { 0, 0, 0, 1 } }
+            { texture = target.color.tex, clear_color = { 0, 0, 0, 1 } }
         }
     })
     gpu.cmd_set_shaders(cmd_buf, vert_shader, frag_shader)
@@ -869,7 +869,7 @@ test_compute :: proc(target: Render_Target)
     // Render the texture to the swapchain using a fullscreen quad
     gpu.cmd_begin_render_pass(cmd_buf, {
         color_attachments = {
-            { texture = target.color, clear_color = { 0.0, 0.0, 0.0, 1.0 } }
+            { texture = target.color.tex, clear_color = { 0.0, 0.0, 0.0, 1.0 } }
         }
     })
     gpu.cmd_set_shaders(cmd_buf, vert_shader, frag_shader)
@@ -1019,7 +1019,7 @@ test_comparison_sampler :: proc(target: Render_Target)
         gpu.cmd_begin_render_pass(cmd_buf, {
             color_attachments = {},
             depth_attachment = gpu.Render_Attachment {
-                texture = shadow_depth_texture, clear_color = 1.0
+                texture = shadow_depth_texture.tex, clear_color = 1.0
             },
         })
         gpu.cmd_set_shaders(cmd_buf, vert_shader, shadow_frag_shader)
@@ -1060,10 +1060,10 @@ test_comparison_sampler :: proc(target: Render_Target)
     {
         gpu.cmd_begin_render_pass(cmd_buf, {
             color_attachments = {
-                { texture = target.color, clear_color = { 0.7, 0.7, 0.7, 1.0 } }
+                { texture = target.color.tex, clear_color = { 0.7, 0.7, 0.7, 1.0 } }
             },
             depth_attachment = gpu.Render_Attachment {
-                texture = target.depth, clear_color = 1.0
+                texture = target.depth.tex, clear_color = 1.0
             },
         })
         gpu.cmd_set_shaders(cmd_buf, vert_shader, frag_shader)
@@ -1243,7 +1243,7 @@ test_sw_pathtracing :: proc(target: Render_Target)
     // Render the texture to the swapchain using a fullscreen quad
     gpu.cmd_begin_render_pass(cmd_buf, {
         color_attachments = {
-            { texture = target.color, clear_color = { 0.0, 0.0, 0.0, 1.0 } }
+            { texture = target.color.tex, clear_color = { 0.0, 0.0, 0.0, 1.0 } }
         }
     })
     gpu.cmd_set_shaders(cmd_buf, vert_shader, frag_shader)
@@ -1591,7 +1591,7 @@ test_hw_pathtracing :: proc(target: Render_Target)
     // Render the texture to the swapchain using a fullscreen quad
     gpu.cmd_begin_render_pass(cmd_buf, {
         color_attachments = {
-            { texture = target.color, clear_color = { 0.0, 0.0, 0.0, 1.0 } }
+            { texture = target.color.tex, clear_color = { 0.0, 0.0, 0.0, 1.0 } }
         }
     })
     gpu.cmd_set_shaders(cmd_buf, vert_shader, frag_shader)

@@ -168,7 +168,7 @@ main :: proc()
                 { texture = swapchain, clear_color = { 0.7, 0.7, 0.7, 1.0 } }
             },
             depth_attachment = gpu.Render_Attachment {
-                texture = depth_texture, clear_color = 1.0
+                texture = depth_texture.tex, clear_color = 1.0
             },
         })
 
